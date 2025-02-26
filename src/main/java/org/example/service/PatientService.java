@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatientService {
-
     // Список для хранения пациентов
     private List<Patient> patients = new ArrayList<>();
 

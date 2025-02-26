@@ -28,7 +28,7 @@ public class MainTest {
     public void testCreatePatientValid() {
         logger.info("Starting testCreatePatientValid");
         // Given
-        String id = "12345";
+        long id = 12345L; // Изменено на long
         String lastName = "Ivanov";
         String firstName = "Ivan";
         String middleName = "Ivanovich";
@@ -58,9 +58,13 @@ public class MainTest {
     public void testSearchPatientsByDiagnosis() {
         logger.info("Starting testSearchPatientsByDiagnosis");
         // Given
-        Patient patient1 = PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu");
-        Patient patient2 = PatientFactory.createPatient("12346", "Petrov", "Petr", "Petrovich", "Moscow", "+79161234568", "10000002", "Cold");
-        Patient patient3 = PatientFactory.createPatient("12347", "Sidorov", "Sidor", "Sidorovich", "Moscow", "+79161234569", "10000003", "Flu");
+        long id1 = 12345L;
+        long id2 = 12346L;
+        long id3 = 12347L;
+
+        Patient patient1 = PatientFactory.createPatient(id1, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu");
+        Patient patient2 = PatientFactory.createPatient(id2, "Petrov", "Petr", "Petrovich", "Moscow", "+79161234568", "10000002", "Cold");
+        Patient patient3 = PatientFactory.createPatient(id3, "Sidorov", "Sidor", "Sidorovich", "Moscow", "+79161234569", "10000003", "Flu");
 
         patientService.addPatient(patient1);
         patientService.addPatient(patient2);
@@ -82,9 +86,13 @@ public class MainTest {
     public void testSearchPatientsByMedicalCardRange() {
         logger.info("Starting testSearchPatientsByMedicalCardRange");
         // Given
-        Patient patient1 = PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu");
-        Patient patient2 = PatientFactory.createPatient("12346", "Petrov", "Petr", "Petrovich", "Moscow", "+79161234568", "10000002", "Cold");
-        Patient patient3 = PatientFactory.createPatient("12347", "Sidorov", "Sidor", "Sidorovich", "Moscow", "+79161234569", "10000003", "Flu");
+        long id1 = 12345L;
+        long id2 = 12346L;
+        long id3 = 12347L;
+
+        Patient patient1 = PatientFactory.createPatient(id1, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu");
+        Patient patient2 = PatientFactory.createPatient(id2, "Petrov", "Petr", "Petrovich", "Moscow", "+79161234568", "10000002", "Cold");
+        Patient patient3 = PatientFactory.createPatient(id3, "Sidorov", "Sidor", "Sidorovich", "Moscow", "+79161234569", "10000003", "Flu");
 
         patientService.addPatient(patient1);
         patientService.addPatient(patient2);
@@ -109,7 +117,7 @@ public class MainTest {
         String medicalCardNumber = "abc"; // Некорректный номер карты
 
         // When
-        PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", medicalCardNumber, "Flu");
+        PatientFactory.createPatient(12345L, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", medicalCardNumber, "Flu");
     }
 
     // 5. Тест на добавление пациента с некорректным телефоном
@@ -120,7 +128,7 @@ public class MainTest {
         String phone = "invalid-phone"; // Некорректный номер телефона
 
         // When
-        PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", phone, "10000001", "Flu");
+        PatientFactory.createPatient(12345L, "Ivanov", "Ivan", "Ivanovich", "Moscow", phone, "10000001", "Flu");
     }
 
     // 6. Тест на создание пациента с некорректным ID
@@ -131,7 +139,7 @@ public class MainTest {
         String id = "id123"; // Некорректный ID
 
         // When
-        PatientFactory.createPatient(id, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu");
+        PatientFactory.createPatient(Long.parseLong(id), "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu");
     }
 
     // 7. Тест на пустой список при поиске по диагнозу
@@ -139,7 +147,7 @@ public class MainTest {
     public void testSearchPatientsByDiagnosisEmpty() {
         logger.info("Starting testSearchPatientsByDiagnosisEmpty");
         // Given
-        patientService.addPatient(PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu"));
+        patientService.addPatient(PatientFactory.createPatient(12345L, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu"));
 
         // When
         List<Patient> result = patientService.findPatientsByDiagnosis("Cold");
@@ -154,7 +162,7 @@ public class MainTest {
     public void testSearchPatientsByMedicalCardRangeEmpty() {
         logger.info("Starting testSearchPatientsByMedicalCardRangeEmpty");
         // Given
-        patientService.addPatient(PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu"));
+        patientService.addPatient(PatientFactory.createPatient(12345L, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu"));
 
         // When
         List<Patient> result = patientService.findPatientsByMedicalCardRange(10000002, 10000003);
@@ -172,7 +180,7 @@ public class MainTest {
         String diagnosis = ""; // Пустой диагноз
 
         // When
-        Patient patient = PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", diagnosis);
+        Patient patient = PatientFactory.createPatient(12345L, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", diagnosis);
 
         // Then
         assertNotNull(patient);
@@ -202,7 +210,7 @@ public class MainTest {
     public void testCreatePatientWithNullValues() {
         logger.info("Starting testCreatePatientWithNullValues");
         // Given
-        String id = null;
+        Long id = null; // Изменено на Long
         String lastName = null;
         String firstName = null;
         String middleName = null;
@@ -220,7 +228,7 @@ public class MainTest {
     public void testSearchPatientsByInvalidMedicalCardRange() {
         logger.info("Starting testSearchPatientsByInvalidMedicalCardRange");
         // Given
-        patientService.addPatient(PatientFactory.createPatient("12345", "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu"));
+        patientService.addPatient(PatientFactory.createPatient(12345L, "Ivanov", "Ivan", "Ivanovich", "Moscow", "+79161234567", "10000001", "Flu"));
 
         // When
         List<Patient> result = patientService.findPatientsByMedicalCardRange(10000002, 10000001); // Некорректный диапазон

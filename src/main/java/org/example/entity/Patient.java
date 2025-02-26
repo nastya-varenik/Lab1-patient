@@ -1,7 +1,7 @@
 package org.example.entity;
 
 public class Patient {
-    private String id;
+    private long id; // Изменено на long
     private String lastName;
     private String firstName;
     private String middleName;
@@ -10,7 +10,7 @@ public class Patient {
     private String medicalCardNumber;
     private String diagnosis;
 
-    public Patient(String id, String lastName, String firstName, String middleName,
+    public Patient(long id, String lastName, String firstName, String middleName,
                    String address, String phone, String medicalCardNumber, String diagnosis) {
         this.id = id;
         this.lastName = lastName;
@@ -23,27 +23,52 @@ public class Patient {
     }
 
     // Getters and setters
-    public String getId() { return id; }
-    public String getLastName() { return lastName; }
-    public String getFirstName() { return firstName; }
-    public String getMiddleName() { return middleName; }
-    public String getAddress() { return address; }
-    public String getPhone() { return phone; }
-    public String getMedicalCardNumber() { return medicalCardNumber; }
-    public String getDiagnosis() { return diagnosis; }
+    public long getId() {
+        return id; // Изменено на long
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getMedicalCardNumber() {
+        return medicalCardNumber;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
 
     // Переопределение toString() для удобства вывода данных
     @Override
     public String toString() {
-        return "Patient{" +
-                "id='" + id + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", medicalCardNumber='" + medicalCardNumber + '\'' +
-                ", diagnosis='" + diagnosis + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Patient{")
+                .append("id=").append(id) // Изменено на long
+                .append(", lastName='").append(lastName).append('\'')
+                .append(", firstName='").append(firstName).append('\'')
+                .append(", middleName='").append(middleName).append('\'')
+                .append(", address='").append(address).append('\'')
+                .append(", phone='").append(phone).append('\'')
+                .append(", medicalCardNumber='").append(medicalCardNumber).append('\'')
+                .append(", diagnosis='").append(diagnosis).append('\'')
+                .append('}');
+        return sb.toString();
     }
 }

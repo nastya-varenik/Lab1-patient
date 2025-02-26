@@ -22,4 +22,16 @@ public class PatientValidator {
     public static boolean isValidMedicalCard(String medicalCardNumber) {
         return medicalCardNumber != null && MEDICAL_CARD_PATTERN.matcher(medicalCardNumber).matches();
     }
+
+    // ✅ Новый метод для проверки всех данных пациента
+    public static boolean isValidPatientData(Long id, String lastName, String firstName, String middleName,
+                                             String address, String phone, String medicalCardNumber, String diagnosis) {
+        if (id == null || lastName == null || firstName == null || address == null) {
+            return false;
+        }
+        if (!isValidPhone(phone) || !isValidMedicalCard(medicalCardNumber)) {
+            return false;
+        }
+        return true;
+    }
 }
